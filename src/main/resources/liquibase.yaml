@@ -1,0 +1,5 @@
+password: ${DATASOURCE_PASSWORD}
+user: ${DATASOURCE_USERNAME}
+url: jdbc:postgresql://database:5432/jwtappbase
+referenceUrl: jdbc:postgresql://database:5432/jwtappbase
+enabled: false
