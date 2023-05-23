@@ -102,10 +102,10 @@
             </column>
 
             <column name="address" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
-            <column name="owner_id" type="INTEGER">
+            <column name="owner_id" type="BIGINT">
                 <constraints nullable="true"/>
             </column>
 
@@ -117,5 +117,36 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="asayke">
+        <validCheckSum>8:9a1e2b76dde9761d18972f25221800ed</validCheckSum>
+        <createTable tableName="user_houses">
+            <column name="user_id" type="BIGINT">
+            </column>
+
+            <column name="house_id" type="BIGINT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="asayke">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_houses"
+                                 constraintName="fk_user_houses_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="asayke">
+        <addForeignKeyConstraint baseColumnNames="house_id"
+                                 baseTableName="user_houses"
+                                 constraintName="fk_user_houses_houses"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="houses"/>
     </changeSet>
 </databaseChangeLog>

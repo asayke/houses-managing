@@ -1,6 +1,8 @@
 package ru.asayke.houses.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,8 +28,9 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_houses", joinColumns = {@JoinColumn(name = "user_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "house_id", referencedColumnName = "id")})
-//    private List<Role> houses;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name = "user_houses", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "house_id", referencedColumnName = "id")})
+    private List<House> houses;
 }

@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.asayke.houses.dto.UserDTO;
-import ru.asayke.houses.dto.updateDTO.user.AgeDTO;
-import ru.asayke.houses.dto.updateDTO.user.NameDTO;
+import ru.asayke.houses.dto.fieldsDTO.user.AgeDTO;
+import ru.asayke.houses.dto.fieldsDTO.user.NameDTO;
 import ru.asayke.houses.model.User;
 import ru.asayke.houses.service.UserService;
 

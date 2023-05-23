@@ -3,7 +3,6 @@ package ru.asayke.houses.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,8 +12,5 @@ public class House extends BaseEntity {
     private String address;
 
     @Column(name = "owner_id")
-    private Integer owner_id;
-
-//    @ManyToMany(mappedBy = "houses", fetch = FetchType.LAZY)
-//    private List<User> users;
+    private Long ownerId;
 }
