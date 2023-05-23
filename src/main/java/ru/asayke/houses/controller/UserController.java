@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/update-color")
+    @PostMapping("/update-age")
     public ResponseEntity<HttpStatus> updateColor(@RequestBody AgeDTO ageDTO, Principal principal) {
         String username = principal.getName();
 
