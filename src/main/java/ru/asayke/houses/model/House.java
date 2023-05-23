@@ -15,6 +15,6 @@ public class House extends BaseEntity {
     @Column(name = "owner_id")
     private Integer owner_id;
 
-    @ManyToMany(mappedBy = "houses", fetch = FetchType.LAZY)
-    private List<User> users;
+//    @ManyToMany(mappedBy = "houses", fetch = FetchType.LAZY)
+//    private List<User> users;
 }

@@ -26,8 +26,8 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_houses", joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "house_id", referencedColumnName = "id")})
-    private List<Role> houses;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_houses", joinColumns = {@JoinColumn(name = "user_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "house_id", referencedColumnName = "id")})
+//    private List<Role> houses;
 }

@@ -24,9 +24,6 @@ public class UserController {
     public ResponseEntity<UserDTO> getUser(Principal principal) {
         String username = principal.getName();
 
-        if (username == null)
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
         User user = userService.findByUsername(username);
 
         return ResponseEntity.ok(convertToUserDTO(user));
