@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.asayke.houses.dto.MemberDTO;
 import ru.asayke.houses.dto.HouseDTO;
 import ru.asayke.houses.dto.fieldsDTO.house.AddressDTO;
 import ru.asayke.houses.model.House;
@@ -35,6 +36,31 @@ public class HouseController {
         String username = principal.getName();
 
         return ResponseEntity.ok(houseService.findAllByOwner(username).stream().map(this::convertToHouseDTO).collect(Collectors.toList()));
+    }
+
+    @PostMapping(value = "/add-new-member")
+    public ResponseEntity<HttpStatus> addNewMember(Principal principal, @RequestBody MemberDTO addMemberDTO) {
+        String username = principal.getName();
+
+        houseService.addNewMember(username, addMemberDTO);
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/find-all-by-user")
+    public ResponseEntity<List<HouseDTO>> findAllByUser(Principal principal) {
+        String username = principal.getName();
+
+        return ResponseEntity.ok(houseService.findAllByUser(username).stream().map(this::convertToHouseDTO).collect(Collectors.toList()));
+    }
+
+    @PostMapping(value = "/delete-member")
+    public ResponseEntity<HttpStatus> deleteMember(Principal principal, @RequestBody MemberDTO memberDTO) {
+        String username = principal.getName();
+        //TODO FIX THIS
+        houseService.deleteMember(username, memberDTO);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     private HouseDTO convertToHouseDTO(House house) {

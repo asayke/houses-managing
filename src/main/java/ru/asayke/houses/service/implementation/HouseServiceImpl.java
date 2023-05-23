@@ -3,6 +3,7 @@ package ru.asayke.houses.service.implementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.asayke.houses.dto.MemberDTO;
 import ru.asayke.houses.model.House;
 import ru.asayke.houses.model.User;
 import ru.asayke.houses.repository.HouseRepository;
@@ -10,6 +11,7 @@ import ru.asayke.houses.repository.UserRepository;
 import ru.asayke.houses.service.HouseService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -40,5 +42,51 @@ public class HouseServiceImpl implements HouseService {
         User user = userRepository.findByUsername(username);
 
         return houseRepository.findAllByOwnerId(user.getId());
+    }
+
+    @Override
+    @Transactional
+    public void addNewMember(String username, MemberDTO addMemberDTO) {
+        User user = userRepository.findByUsername(username);
+
+        if(Objects.equals(addMemberDTO.getNewMemberId(), user.getId())) return;
+
+        House house = houseRepository.getById(addMemberDTO.getHouseId());
+
+        if(!Objects.equals(user.getId(), house.getOwnerId())) return;
+
+        User newMember = userRepository.getById(addMemberDTO.getNewMemberId());
+
+        List<House> houses = newMember.getHouses();
+        houses.add(house);
+        newMember.setHouses(houses);
+
+        userRepository.save(newMember);
+    }
+
+    @Override
+    public List<House> findAllByUser(String username) {
+        User user = userRepository.findByUsername(username);
+
+        return user.getHouses();
+    }
+
+    @Override
+    public void deleteMember(String username, MemberDTO memberDTO) {
+        User user = userRepository.findByUsername(username);
+
+        if(Objects.equals(memberDTO.getNewMemberId(), user.getId())) return;
+
+        House house = houseRepository.getById(memberDTO.getHouseId());
+
+        if(!Objects.equals(user.getId(), house.getOwnerId())) return;
+
+        User member = userRepository.getById(memberDTO.getNewMemberId());
+
+        List<House> houses = member.getHouses();
+        houses.remove(house);
+        member.setHouses(houses);
+
+        userRepository.save(member);
     }
 }
