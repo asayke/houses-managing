@@ -10,8 +10,10 @@ import ru.asayke.houses.repository.HouseRepository;
 import ru.asayke.houses.repository.UserRepository;
 import ru.asayke.houses.service.HouseService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -72,6 +74,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    @Transactional
     public void deleteMember(String username, MemberDTO memberDTO) {
         User user = userRepository.findByUsername(username);
 
@@ -83,9 +86,8 @@ public class HouseServiceImpl implements HouseService {
 
         User member = userRepository.getById(memberDTO.getNewMemberId());
 
-        List<House> houses = member.getHouses();
-        houses.remove(house);
-        member.setHouses(houses);
+        List<House> newHouses = member.getHouses().stream().filter(h -> !Objects.equals(h.getId(), house.getId())).collect(Collectors.toList());
+        member.setHouses(newHouses);
 
         userRepository.save(member);
     }
