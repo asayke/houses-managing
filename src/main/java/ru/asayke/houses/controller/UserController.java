@@ -47,6 +47,15 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PostMapping(value = "/delete-user")
+    public ResponseEntity<HttpStatus> deleteUser(Principal principal) {
+        String username = principal.getName();
+
+        userService.deleteUser(username);
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
     private UserDTO convertToUserDTO(User user) {
         return mapper.map(user, UserDTO.class);
     }

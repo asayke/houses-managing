@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface HouseRepository extends JpaRepository<House, Long> {
     List<House> findAllByOwnerId(Long ownerId);
+    void deleteAllByOwnerId(Long id);
 }

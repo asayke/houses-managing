@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.asayke.houses.model.Role;
 import ru.asayke.houses.model.Status;
 import ru.asayke.houses.model.User;
+import ru.asayke.houses.repository.HouseRepository;
 import ru.asayke.houses.repository.RoleRepository;
 import ru.asayke.houses.repository.UserRepository;
 import ru.asayke.houses.service.UserService;
@@ -20,6 +21,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final HouseRepository houseRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
@@ -67,5 +69,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username);
         user.setAge(newAge);
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username);
+        houseRepository.deleteAllByOwnerId(user.getId());
+        userRepository.deleteById(user.getId());
     }
 }
