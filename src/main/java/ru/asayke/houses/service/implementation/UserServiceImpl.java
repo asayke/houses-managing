@@ -14,7 +14,8 @@ import ru.asayke.houses.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом + в нём же прописать final
+//TODO почитай для чего нужно @Transactional(readOnly = true) и подумай, нужно ли это здесь
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor

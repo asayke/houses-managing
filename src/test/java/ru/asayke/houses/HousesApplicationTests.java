@@ -8,6 +8,7 @@ class HousesApplicationTests {
 
     @Test
     void contextLoads() {
+        //TODO напиши тесты желательно для всего (или почти) функционала. + можно написать интеграционные тесты с Docker
     }
 
 }

@@ -6,5 +6,6 @@ import ru.asayke.houses.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    //TODO Лучше возвращать Optional<User>
     User findByUsername(String username);
 }

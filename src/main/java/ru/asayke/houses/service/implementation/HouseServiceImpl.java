@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом + в нём же прописать final
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -46,6 +48,7 @@ public class HouseServiceImpl implements HouseService {
         return houseRepository.findAllByOwnerId(user.getId());
     }
 
+    //TODO МБ можно вынести общую логику
     @Override
     @Transactional
     public void addNewMember(String username, MemberDTO addMemberDTO) {
@@ -66,6 +69,7 @@ public class HouseServiceImpl implements HouseService {
         userRepository.save(newMember);
     }
 
+    //TODO сделай oneline с elseThrow
     @Override
     public List<House> findAllByUser(String username) {
         User user = userRepository.findByUsername(username);
@@ -73,6 +77,7 @@ public class HouseServiceImpl implements HouseService {
         return user.getHouses();
     }
 
+    //TODO МБ можно вынести общую логику
     @Override
     @Transactional
     public void deleteMember(String username, MemberDTO memberDTO) {

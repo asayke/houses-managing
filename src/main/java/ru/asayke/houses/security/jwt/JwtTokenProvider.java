@@ -21,8 +21,11 @@ import java.util.List;
 
 @Component
 public class JwtTokenProvider {
+    //TODO это можно засунуть в @Configuration файл
     @Value("${jwt.token.secret}")
     private String secret;
+    //TODO это можно засунуть в @Configuration файл
+
     @Value("${jwt.token.expired}")
     private long validityInMs;
     private final UserDetailsService userDetailsService;

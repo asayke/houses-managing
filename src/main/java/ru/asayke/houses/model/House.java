@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+//TODO убрать @Data, использовать только Getter Setter и возможно Equals и Hashcode если где-то используется
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом
 @Data
 @Entity
 @Table(name = "houses")

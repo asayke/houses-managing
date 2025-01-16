@@ -6,5 +6,6 @@ import ru.asayke.houses.model.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
+    //TODO Лучше возвращать Optional<Role>
     Role findByName(String roleName);
 }

@@ -11,6 +11,7 @@ public class HousesApplication {
         SpringApplication.run(HousesApplication.class, args);
     }
 
+    //TODO move to @Configuration file
     @Bean
     public ModelMapper mapper() {
         return new ModelMapper();

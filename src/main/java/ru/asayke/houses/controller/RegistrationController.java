@@ -13,6 +13,7 @@ import ru.asayke.houses.util.ErrorsUtil;
 import ru.asayke.houses.util.UserException;
 import ru.asayke.houses.util.UserExceptionResponse;
 import ru.asayke.houses.util.UserValidator;
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом + в нём же прописать final
 
 @RestController
 @RequestMapping(value = "/api/registration/")
@@ -24,6 +25,7 @@ public class RegistrationController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> register(@RequestBody RegistrationRequest request, BindingResult bindingResult) {
+        //TODO перенести логику в сервисы
         User userToAdd = convertToUser(request);
         userValidator.validate(userToAdd, bindingResult);
 
@@ -35,6 +37,7 @@ public class RegistrationController {
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
+    //TODO для такого есть @ControllerAdvice
     @ExceptionHandler
     private ResponseEntity<UserExceptionResponse> handleException(UserException e) {
         UserExceptionResponse response = new UserExceptionResponse(
@@ -44,7 +47,7 @@ public class RegistrationController {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-
+    //TODO перенести логику в сервисы
     private User convertToUser(RegistrationRequest regDTO) {
         return mapper.map(regDTO, User.class);
     }

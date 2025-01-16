@@ -17,6 +17,7 @@ import ru.asayke.houses.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом + в нём же прописать final
 
 @RestController
 @RequestMapping(value = "/api/login/")
@@ -28,6 +29,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity login(@RequestBody AuthenticationRequest requestDTO) {
+        //TODO перенести логику в сервисы
         try {
             String username = requestDTO.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDTO.getPassword()));

@@ -12,6 +12,7 @@ import ru.asayke.houses.model.User;
 import ru.asayke.houses.service.UserService;
 
 import java.security.Principal;
+//TODO Использовать @FieldsDefault для того чтобы убрать private и писать его под капотом + в нём же прописать final
 
 @RestController
 @RequestMapping(value = "/user/")
@@ -22,6 +23,7 @@ public class UserController {
 
     @GetMapping("get-user")
     public ResponseEntity<UserDTO> getUser(Principal principal) {
+        //TODO перенести логику в сервисы
         String username = principal.getName();
 
         User user = userService.findByUsername(username);
@@ -31,6 +33,7 @@ public class UserController {
 
     @PostMapping("/update-name")
     public ResponseEntity<HttpStatus> updateFirstName(@RequestBody NameDTO nameDTO, Principal principal) {
+        //TODO перенести логику в сервисы
         String username = principal.getName();
 
         userService.updateUserName(username, nameDTO.getName());
@@ -40,6 +43,7 @@ public class UserController {
 
     @PostMapping("/update-age")
     public ResponseEntity<HttpStatus> updateColor(@RequestBody AgeDTO ageDTO, Principal principal) {
+        //TODO перенести логику в сервисы
         String username = principal.getName();
 
         userService.updateUserAge(username, ageDTO.getAge());
@@ -49,6 +53,7 @@ public class UserController {
 
     @PostMapping(value = "/delete-user")
     public ResponseEntity<HttpStatus> deleteUser(Principal principal) {
+        //TODO перенести логику в сервисы
         String username = principal.getName();
 
         userService.deleteUser(username);
@@ -56,6 +61,7 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    //TODO перенести логику в сервисы
     private UserDTO convertToUserDTO(User user) {
         return mapper.map(user, UserDTO.class);
     }
